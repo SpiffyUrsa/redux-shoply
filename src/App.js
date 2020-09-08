@@ -1,15 +1,25 @@
 import React from 'react';
 import './App.css';
-import ItemList  from "./ItemList";
+import ItemList from "./ItemList";
+import Navbar from './Navbar';
 
+/**
+ * App --> {NavBar, ItemList --> Item}
+ * 
+ * Props:
+ *  - none
+ * 
+ * state:
+ *  - maintained by rootReducer
+ */
 function App() {
   return (
     <div className="App">
-      {/* <NavBar /> Will have the shopping cart icon and  the total price so far. */}
+      <Navbar />
       {/* <Item /> */}
       <ItemList />
       {/* <ProductDetails />
-      <ShoppingCart /> */}
+        <ShoppingCart /> */}
     </div>
   );
 }
