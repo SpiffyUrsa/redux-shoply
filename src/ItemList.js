@@ -18,8 +18,10 @@ function ItemList() {
   const shopData = useSelector(state => state.shopData, shallowEqual);
 
   //For each item in ShopData, create card with Item detail
-  const itemDisplay= []
-  for (let key in shopData){
+  // CR: Better to turn the itemDisplay array to contain objects instead of react components.
+  //Can then map over that array for the components.
+  const itemDisplay = [];
+  for (let key in shopData) {
     const { name, price, description, image_url } = shopData[key]
     itemDisplay.push(<Item
       id={key}
@@ -27,8 +29,9 @@ function ItemList() {
       price={price}
       description={description}
       image_url={image_url}
+      showDetails={false}
       key={key}
-      />
+    />
     )
   }
 

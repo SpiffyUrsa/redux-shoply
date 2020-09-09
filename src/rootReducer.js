@@ -16,32 +16,39 @@ const INITIAL_STATE = {
 }
 
 function rootReducer(state = INITIAL_STATE, action) {
-  const stateCopy = { ...state }
 
   //CR: Could use var to deal with the id, price being same values
-  //TODO: remove the add/remove var renames
 
   switch (action.type) {
     case ADD_TO_CART: {
-      let { id: addId, price: addValue } = action.payload
-      if (stateCopy.cart[addId]) stateCopy.cart[addId]++
-      else stateCopy.cart[addId] = 1
+      let cartCopy = { ...state.cart }
+      let { id, price } = action.payload
 
-      stateCopy.value += addValue
+      if (cartCopy[id]) cartCopy[id]++
+      else cartCopy[id] = 1
 
-      return stateCopy;
+      let newValue = state.value + price;
+      // CR: Good use case for a helper function that does this along with calculating value of items
+      //in cart.
+      newValue = parseFloat(newValue.toFixed(2));
+
+      return { ...state, cart: cartCopy, value: newValue };
     }
 
     case REMOVE_FROM_CART: {
-      let { id: removeId, price: removeValue } = action.payload
-      if (stateCopy.cart[removeId]) {
-        stateCopy.cart[removeId]--
-        stateCopy.value -= removeValue
+      let cartCopy = { ...state.cart }
+      let { id, price } = action.payload
+      let newValue = state.value;
+
+      if (cartCopy[id]) {
+        cartCopy[id]--
+        newValue -= price
+        newValue = parseFloat(newValue.toFixed(2));
       }
 
-      if (stateCopy.cart[removeId] === 0) delete stateCopy.cart[removeId]
+      if (cartCopy[id] === 0) delete cartCopy[id]
 
-      return stateCopy;
+      return { ...state, cart: cartCopy, value: newValue };
     }
 
     default:

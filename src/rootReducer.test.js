@@ -4,6 +4,9 @@ import "@testing-library/jest-dom";
 
 // TODO: put everything in our screen - alternative would be to mock the data
 
+// CR: Use expect(any) for the ids in case they change. Mock up the values. Make fixtures and factories:
+// Fixture: dummy object. Factory: creates the dummy objects.
+
 test('can add to cart', () => {
   let state;
   state = rootReducer({

@@ -17,17 +17,17 @@ function Navbar() {
 
   const cart = useSelector(state => state.cart, shallowEqual);
 
-  //Calculate total count of items in cart
+  //Calculate total count of items in cart.
+  // CR: Put this in a file called calc.js as a helper function.
   const itemNumber = Object.values(cart).reduce((acc, curr) => acc + curr, 0)
 
   //Calculate total price of items in cart
   const value = useSelector(state => state.value, shallowEqual);
 
   return (
-    //TODO: Add in links
-    <nav>
-      <NavLink exact to=''> Shoply </NavLink>
-      <NavLink exact to=''> Cart: ${value} ({itemNumber}) </NavLink>
+    <nav className="navbar bg-primary rounded bg-dark fixed-top">
+      <NavLink exact to='/' className="navbar-brand"> Shoply </NavLink>
+      <NavLink exact to='/cart' className="nav-link"> Cart: ${value} ({itemNumber}) </NavLink>
     </nav>
   )
 }
